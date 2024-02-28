@@ -14,6 +14,7 @@ declare keep_alive
 declare peer_public_key
 declare post_down
 declare post_up
+declare port
 declare mtu
 declare pre_shared_key
 
@@ -91,6 +92,8 @@ if bashio::config.has_value 'interface.mtu'; then
     mtu=$(bashio::config 'interface.mtu')
     echo "MTU = ${mtu}" >> "${config}"
 fi
+
+port=$(bashio::addon.port "51820/udp")
 
 # Status API Storage
 if ! bashio::fs.directory_exists '/var/lib/wireguard'; then
